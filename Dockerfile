@@ -20,7 +20,7 @@ RUN dnf -y install 'dnf-command(copr)' && \
 
 RUN mkdir /output && \
     mkdir /python-libraries && \
-    echo Installing Nimble && \
+    echo Installing Nimble And PyAid && \
     git clone https://github.com/sernst/Nimble.git /python-libraries/nimble && \
     git clone https://github.com/sernst/PyAid.git /python-libraries/pyaid
 
@@ -31,7 +31,7 @@ RUN echo alias hpython="\"/usr/autodesk/maya/bin/mayapy\"" >> ~/.bashrc && \
 # Setup environment
 ENV MAYA_LOCATION=/usr/autodesk/maya/
 ENV PATH=$MAYA_LOCATION/bin:$PATH
-ENV PYTHONPATH=/python-libraries/nimble/src:/python-libraries/pyaid/src:$PYTHONPATH
+ENV PYTHONPATH=/libraries:/python-libraries/nimble/src:/python-libraries/pyaid/src:$PYTHONPATH
 
 # Workaround for "Segmentation fault (core dumped)"
 # See https://forums.autodesk.com/t5/maya-general/render-crash-on-linux/m-p/5608552/highlight/true

@@ -62,6 +62,32 @@ the file with the url:
 
 __http://localhost:8000/test.png__
 
+
+## Shared Libraries
+
+If you want to share Python libraries between the host and container so that
+you can edit those libraries on the host and view the changes in the container
+you will need to mount a volume to the container with an additional argument
+in the run command specified above:
+
+```bash
+$ docker run \
+    -di \
+    --rm \
+    -p 7800:7800 \
+    -p 7801:7801 \
+    -p 8000:8000 \
+    -v /path/to/my/libraries:/libraries
+    swernst/maya-data-vis
+```
+
+The _/libraries_ directory in the container is part of the Python path for the
+container. Therefore, any Python libraries you mount within this directory
+will be available inside Maya. Just replace _/path/to/my/libraries_ with the
+actual path to a directory that contains your Python libraries in the command
+above and your container will have access to those libraries and any changes
+you make to them.
+
 ## Stop Container
 
 The container will continue to run with Maya active until you manually
